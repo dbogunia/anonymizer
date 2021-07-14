@@ -48,17 +48,7 @@ func RandStringRunes(n int) string {
 func anonymize(tableName string, columnName string, db sql.DB) {
 
 	log.Println("Working on " + tableName + "." + columnName)
-	//Open up hybris DB
-	/*
-		db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/testdb")
 
-		// If there is an error opening the connection, we panic ;-)
-		if err != nil {
-			panic(err.Error())
-		}
-
-		defer db.Close()
-	*/
 	// create table for values
 	var values []string
 
