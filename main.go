@@ -94,7 +94,7 @@ func anonymize(tableName string, columnName string, db sql.DB) {
 			values[i] +
 			"'"
 
-		log.Println("Anonymizing: " + values[i] + " to: " + newValue)
+		// log.Println("Anonymizing: " + values[i] + " to: " + newValue)
 		// and execute it
 		update, err := db.Query(updStr)
 		// in case of error we panic ;-)
@@ -140,30 +140,36 @@ func loadTablesFromFile() []string {
 
 func main() {
 
-	var connString := os.Args[1]
+	if len(os.Args) < 2 {
+		log.Println("Please provide connection string")
 
-	log.Println("Starting anonymizer")
-	tables := loadTablesFromFile()
+	} else {
 
-	log.Println("Opening database connection")
-	db, err := sql.Open("mysql", connString)
+		connString := os.Args[1]
 
-	// If there is an error opening the connection, we panic ;-)
-	if err != nil {
-		panic(err.Error())
-	}
+		log.Println("Starting anonymizer")
+		tables := loadTablesFromFile()
 
-	defer db.Close()
+		log.Println("Opening database connection")
+		db, err := sql.Open("mysql", connString)
 
-	for _, table := range tables {
+		// If there is an error opening the connection, we panic ;-)
+		if err != nil {
+			panic(err.Error())
+		}
 
-		log.Println("Processing column " + table)
+		defer db.Close()
 
-		tableName := strings.Split(table, ".")[0]
-		columnName := strings.Split(table, ".")[1]
+		for _, table := range tables {
 
-		anonymize(tableName, columnName, *db)
+			log.Println("Processing column " + table)
 
+			tableName := strings.Split(table, ".")[0]
+			columnName := strings.Split(table, ".")[1]
+
+			anonymize(tableName, columnName, *db)
+
+		}
 	}
 
 }
