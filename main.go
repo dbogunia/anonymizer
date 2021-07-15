@@ -94,7 +94,7 @@ func anonymize(tableName string, columnName string, db sql.DB) {
 			values[i] +
 			"'"
 
-		// log.Println("Anonymizing: " + values[i] + " to: " + newValue)
+		log.Println("Anonymizing: " + values[i] + " to: " + newValue)
 		// and execute it
 		update, err := db.Query(updStr)
 		// in case of error we panic ;-)
