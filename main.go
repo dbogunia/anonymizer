@@ -125,7 +125,7 @@ func loadTablesFromFile() []string {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	
+
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
 		tables = append(tables, scanner.Text())
@@ -140,11 +140,13 @@ func loadTablesFromFile() []string {
 
 func main() {
 
+	var connString := os.Args[1]
+
 	log.Println("Starting anonymizer")
 	tables := loadTablesFromFile()
 
 	log.Println("Opening database connection")
-	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/hybris")
+	db, err := sql.Open("mysql", connString)
 
 	// If there is an error opening the connection, we panic ;-)
 	if err != nil {
