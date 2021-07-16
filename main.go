@@ -147,7 +147,7 @@ func main() {
 
 		connString := os.Args[1]
 
-		log.Println("Starting anonymizer")
+		log.Println("Starting anonymizer v1.0.1")
 		tables := loadTablesFromFile()
 
 		log.Println("Opening database connection")
