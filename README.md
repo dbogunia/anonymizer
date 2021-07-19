@@ -12,4 +12,6 @@ sh ./start.sh "username:password@protocol(address)/dbname"
 windows:
 go run main.go "username:password@protocol(address)/dbname"
 
+Or simply use included Dockerfile
+
 Currently it supports only MySQL DB
