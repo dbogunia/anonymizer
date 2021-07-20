@@ -136,9 +136,9 @@ func anonymizeString(str string) string {
 	elements := strings.Split(str, " ")
 	for _, element := range elements {
 		if isNumber(element) {
-			retString = retString + RandNumberRunes(len(element))
+			retString = strings.Join([]string{retString, RandNumberRunes(len(element))}, " ")
 		} else {
-			retString = retString + RandStringRunes(len(element))
+			retString = strings.Join([]string{retString, RandStringRunes(len(element))}, " ")
 		}
 	}
 	return retString
