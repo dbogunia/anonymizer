@@ -135,7 +135,7 @@ func anonymizeString(str string) string {
 	// end of exceptions
 	elements := strings.Split(str, " ")
 	for _, element := range elements {
-		element = strings.Trim(element, " ")
+		element = strings.Trim(element, " '")
 		separator := " "
 		if retString == "+" {
 			separator = ""
@@ -149,7 +149,6 @@ func anonymizeString(str string) string {
 				retString = strings.Join([]string{retString, RandStringRunes(len(element))}, separator)
 			}
 		}
-
 	}
 	return retString
 }
