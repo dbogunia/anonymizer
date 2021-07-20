@@ -119,7 +119,7 @@ func logQueryError(query string, err error) {
 }
 
 func isNumber(str string) bool {
-	newStr := str[1:len(str)]
+	newStr := str[2:len(str)]
 	if _, err := strconv.Atoi(newStr); err == nil {
 		return true
 	}
