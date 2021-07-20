@@ -130,7 +130,7 @@ func anonymizeString(str string) string {
 	// exception for phone muber
 	if strings.HasPrefix(str, "+") {
 		retString = "+"
-		str = str[2:len(str)]
+		str = str[1:len(str)]
 	}
 	// end of exceptions
 	elements := strings.Split(str, " ")
