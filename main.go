@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"database/sql"
-	"fmt"
 	"log"
 	"math/rand"
 	"os"
@@ -75,15 +74,16 @@ func anonymize(tableName string, columnName string, db sql.DB) {
 
 	// anonymize values
 	for i := 0; i < len(values); i++ {
-		var newValue = ""
+		var newValue = anonymizeString(values[i])
 
+		/* not needed anynmore
 		// lets build random string of the same length as original value
 		if isNumber(values[i]) {
 			newValue = RandNumberRunes(len(values[i]))
 		} else {
 			newValue = RandStringRunes(len(values[i]))
 		}
-
+		*/
 		// crerate UPDATE statement
 		updateQuery := "UPDATE " +
 			tableName +
@@ -119,12 +119,29 @@ func logQueryError(query string, err error) {
 }
 
 func isNumber(str string) bool {
-	newStr := str[2:len(str)]
-	log.Println("Old string: " + str + " new string: " + newStr)
-	if _, err := strconv.Atoi(newStr); err == nil {
+	if _, err := strconv.Atoi(str); err == nil {
 		return true
 	}
 	return false
+}
+
+func anonymizeString(str string) string {
+	retString := ""
+	// exception for phone muber
+	if strings.HasPrefix(str, "+") {
+		retString = "+"
+		str = str[2:len(str)]
+	}
+	// end of exceptions
+	elements := strings.Split(str, " ")
+	for _, element := range elements {
+		if isNumber(element) {
+			retString = retString + RandNumberRunes(len(element))
+		} else {
+			retString = retString + RandStringRunes(len(element))
+		}
+	}
+	return retString
 }
 
 func loadTablesFromFile() []string {
@@ -138,7 +155,6 @@ func loadTablesFromFile() []string {
 	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
 		tables = append(tables, scanner.Text())
 	}
 
