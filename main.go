@@ -94,7 +94,7 @@ func anonymize(tableName string, columnName string, db sql.DB) {
 			"' WHERE " +
 			columnName +
 			" = \"" +
-			values[i] +
+			strings.ReplaceAll(values[i], "\"", "\\\"") +
 			"\""
 		log.Println("Anonymizing: " + values[i] + " to: " + newValue)
 
