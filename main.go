@@ -120,6 +120,7 @@ func logQueryError(query string, err error) {
 
 func isNumber(str string) bool {
 	newStr := str[2:len(str)]
+	log.Println("Old string: " + str + " new string: " + newStr)
 	if _, err := strconv.Atoi(newStr); err == nil {
 		return true
 	}
