@@ -137,7 +137,7 @@ func anonymizeString(str string) string {
 	for _, element := range elements {
 		element = strings.Trim(element, " '")
 		separator := " "
-		if retString == "+" {
+		if retString == "+" || retString == "" {
 			separator = ""
 		}
 		if len(element) > 0 {
