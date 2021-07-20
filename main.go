@@ -135,11 +135,15 @@ func anonymizeString(str string) string {
 	// end of exceptions
 	elements := strings.Split(str, " ")
 	for _, element := range elements {
-		if isNumber(element) {
-			retString = strings.Join([]string{retString, RandNumberRunes(len(element))}, " ")
-		} else {
-			retString = strings.Join([]string{retString, RandStringRunes(len(element))}, " ")
+		element = strings.Trim(element, " ")
+		if len(element) > 0 {
+			if isNumber(element) {
+				retString = strings.Join([]string{retString, RandNumberRunes(len(element))}, " ")
+			} else {
+				retString = strings.Join([]string{retString, RandStringRunes(len(element))}, " ")
+			}
 		}
+
 	}
 	return retString
 }
