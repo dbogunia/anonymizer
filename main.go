@@ -136,11 +136,17 @@ func anonymizeString(str string) string {
 	elements := strings.Split(str, " ")
 	for _, element := range elements {
 		element = strings.Trim(element, " ")
+		separator := " "
+		if retString == "+" {
+			separator = ""
+		} else if strings.HasSuffix(element, ",") {
+			separator = ", "
+		}
 		if len(element) > 0 {
 			if isNumber(element) {
-				retString = strings.Join([]string{retString, RandNumberRunes(len(element))}, " ")
+				retString = strings.Join([]string{retString, RandNumberRunes(len(element))}, separator)
 			} else {
-				retString = strings.Join([]string{retString, RandStringRunes(len(element))}, " ")
+				retString = strings.Join([]string{retString, RandStringRunes(len(element))}, separator)
 			}
 		}
 
