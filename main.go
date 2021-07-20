@@ -139,8 +139,6 @@ func anonymizeString(str string) string {
 		separator := " "
 		if retString == "+" {
 			separator = ""
-		} else if strings.HasSuffix(element, ",") {
-			separator = ", "
 		}
 		if len(element) > 0 {
 			if isNumber(element) {
