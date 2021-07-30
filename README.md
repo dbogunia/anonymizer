@@ -33,7 +33,7 @@ if err != nil {
 
 defer f.Close()
 
-if _, err := f.WriteString(updateQuery + "\n"); err != nil {
+if _, err := f.WriteString(updateQuery + ";\n"); err != nil {
 
 	log.Println(err)
 	
