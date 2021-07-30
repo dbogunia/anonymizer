@@ -18,16 +18,26 @@ Currently it supports only MySQL DB
 
 -------
 Changing from updates on DB to generating SQL file
-Comment lines from 101 to 110 
+
+Comment lines from 101 to 110
+
 add code for appengind updateQuery string to file:
-f, err := os.OpenFile("output.sql",
-	os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
+f, err := os.OpenFile("output.sql", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	
 if err != nil {
+
 	log.Println(err)
+	
 }
+
 defer f.Close()
+
 if _, err := f.WriteString(updateQuery + "\n"); err != nil {
+
 	log.Println(err)
+	
 }
+
 
 WARNING: THIS PIECE OF CODE WAS NOT TESTED - PLEASE TEST BEFORE USING IN REAL LIFE SCENARIO!!!
